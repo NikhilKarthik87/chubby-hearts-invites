@@ -1,7 +1,34 @@
 
 import { useEffect, useState } from 'react';
-import { Cloud, Heart, Cupid } from 'lucide-react';
+import { Cloud, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+// Custom Cupid SVG component since lucide doesn't have one
+const CupidIcon = ({ className, size = 24, ...props }: { className?: string; size?: number; [key: string]: any }) => (
+  <div className={className} {...props}>
+    <div className="relative">
+      {/* Cute baby cupid */}
+      <div className="bg-love-soft-pink rounded-full h-24 w-24 flex items-center justify-center">
+        <div className="relative">
+          {/* Cupid body */}
+          <div className="bg-pink-200 rounded-full h-16 w-16 flex items-center justify-center">
+            {/* Cupid face */}
+            <div className="bg-pink-100 rounded-full h-10 w-10 relative">
+              {/* Eyes */}
+              <div className="absolute top-2 left-2 bg-black rounded-full h-1 w-1"></div>
+              <div className="absolute top-2 right-2 bg-black rounded-full h-1 w-1"></div>
+              {/* Smile */}
+              <div className="absolute bottom-2 left-2 right-2 h-1 bg-pink-500 rounded-full"></div>
+            </div>
+          </div>
+          {/* Wings */}
+          <div className="absolute top-0 -left-4 bg-white rounded-full h-8 w-8 rotate-45"></div>
+          <div className="absolute top-0 -right-4 bg-white rounded-full h-8 w-8 -rotate-45"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 export const CloudAnimation = () => {
   const [showCloud, setShowCloud] = useState(true);
@@ -57,27 +84,7 @@ export const CloudAnimation = () => {
 
       {showCupid && (
         <div className="absolute top-1/3 left-10 animate-cupid-shoot">
-          <div className="relative">
-            {/* Cute baby cupid */}
-            <div className="bg-love-soft-pink rounded-full h-24 w-24 flex items-center justify-center">
-              <div className="relative">
-                {/* Cupid body */}
-                <div className="bg-pink-200 rounded-full h-16 w-16 flex items-center justify-center">
-                  {/* Cupid face */}
-                  <div className="bg-pink-100 rounded-full h-10 w-10 relative">
-                    {/* Eyes */}
-                    <div className="absolute top-2 left-2 bg-black rounded-full h-1 w-1"></div>
-                    <div className="absolute top-2 right-2 bg-black rounded-full h-1 w-1"></div>
-                    {/* Smile */}
-                    <div className="absolute bottom-2 left-2 right-2 h-1 bg-pink-500 rounded-full"></div>
-                  </div>
-                </div>
-                {/* Wings */}
-                <div className="absolute top-0 -left-4 bg-white rounded-full h-8 w-8 rotate-45"></div>
-                <div className="absolute top-0 -right-4 bg-white rounded-full h-8 w-8 -rotate-45"></div>
-              </div>
-            </div>
-          </div>
+          <CupidIcon />
         </div>
       )}
 

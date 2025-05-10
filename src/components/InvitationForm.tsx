@@ -4,8 +4,50 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
-import { Pizza, Beer, Wine, ArrowUp, ChickenThighs, Pasta, Veggies } from 'lucide-react';
+import { Pizza, Beer, Wine, ArrowUp, Utensils, Salad } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+
+// Custom chicken icon since lucide doesn't have ChickenThighs
+const ChickenIcon = ({ size = 20, className }: { size?: number, className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M10.5 15.5c1 1 2.3 2.3 3.5 2.3 3.5 0 4.5-4 4.5-7 0-3.5-2.7-5.8-5.8-5.8-4 0-7 3-7 7 0 3.2 1.3 4.2 2.3 5.5" />
+    <path d="M8.5 10.5c-.8.8-2.3 1.8-3 2.3-.7.4-1.6.9-2 1.5-.3.5-.3 1-.2 1.6.2.9 1 1.6 2 1.6h1.1c.9 0 1.8-.5 2.3-1.1" />
+    <path d="m9 12 1 1.5" />
+    <path d="M12.5 9.5 16 13" />
+    <path d="M15 8c-.6-.6-1-1.3-1-2.3 0 0 0-1.2 1.5-1.2 1.3 0 1.8 1.2 1.8 1.2" />
+  </svg>
+);
+
+// Custom pasta icon since lucide doesn't have Pasta
+const PastaIcon = ({ size = 20, className }: { size?: number, className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M4 14c1-5 3.5-6 6-6 4 0 5 3.5 9 3.5 2 0 3-.5 4-2" />
+    <path d="M4 18c1-5 3.5-6 6-6 4 0 5 3.5 9 3.5 2 0 3-.5 4-2" />
+    <path d="M3 10c0-3.5 2.5-6.5 6-6.5 4 0 5 3.5 9 3.5 2 0 3-.5 4-2" />
+  </svg>
+);
 
 export const InvitationForm = () => {
   const { toast } = useToast();
@@ -125,19 +167,19 @@ export const InvitationForm = () => {
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Chicken Biryani" id="food-chicken" className="text-pink-500" />
                 <Label htmlFor="food-chicken" className="font-medium flex items-center">
-                  <ChickenThighs size={20} className="mr-2" /> Chicken Biryani
+                  <ChickenIcon size={20} className="mr-2" /> Chicken Biryani
                 </Label>
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Veg Biryani" id="food-veg" className="text-pink-500" />
                 <Label htmlFor="food-veg" className="font-medium flex items-center">
-                  <Veggies size={20} className="mr-2" /> Veg Biryani
+                  <Salad size={20} className="mr-2" /> Veg Biryani
                 </Label>
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Pasta" id="food-pasta" className="text-pink-500" />
                 <Label htmlFor="food-pasta" className="font-medium flex items-center">
-                  <Pasta size={20} className="mr-2" /> Pasta
+                  <PastaIcon size={20} className="mr-2" /> Pasta
                 </Label>
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
