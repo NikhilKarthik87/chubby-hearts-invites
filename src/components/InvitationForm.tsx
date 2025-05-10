@@ -114,7 +114,7 @@ export const InvitationForm = () => {
 
           {/* Question 2 */}
           <div className="space-y-3 animate-slide-in" style={{ animationDelay: '0.6s' }}>
-            <h3 className="text-xl font-bubblegum text-pink-500">What is your food Preference?</h3>
+            <h3 className="text-xl font-bubblegum text-pink-500">Em thintav Saaaammm ?</h3>
             <RadioGroup value={formData.foodPreference} onValueChange={handleFoodChange} className="flex flex-col space-y-2">
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Pizza" id="food-pizza" className="text-pink-500" />
@@ -143,7 +143,7 @@ export const InvitationForm = () => {
                 <div className="pl-8 pt-2">
                   <Input 
                     type="text" 
-                    placeholder="Please specify" 
+                    placeholder="Inkemana Kaavala cheppu thechedham" 
                     value={formData.otherFood} 
                     onChange={handleOtherFoodChange}
                     className="rounded-full border-pink-200 focus:border-pink-500 focus:ring-pink-500"
@@ -155,7 +155,7 @@ export const InvitationForm = () => {
 
           {/* Question 3 */}
           <div className="space-y-3 animate-slide-in" style={{ animationDelay: '0.8s' }}>
-            <h3 className="text-xl font-bubblegum text-pink-500">What is your drink preference?</h3>
+            <h3 className="text-xl font-bubblegum text-pink-500">Em thaaguthav Saaaaammmm</h3>
             <RadioGroup value={formData.drinkPreference} onValueChange={handleDrinkChange} className="flex flex-col space-y-2">
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-2 px-4">
                 <RadioGroupItem value="Alcohol" id="drink-alcohol" className="text-pink-500" />
