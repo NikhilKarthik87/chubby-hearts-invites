@@ -114,6 +114,10 @@ export default {
 					'70%': { transform: 'translateX(calc(50vw)) translateY(10px)' },
 					'100%': { transform: 'translateX(100vw) translateY(20px)' }
 				},
+				'arrow-shoot': {
+					'0%': { transform: 'translateX(0) translateY(0) rotate(0)' },
+					'100%': { transform: 'translateX(calc(50vw - 50px)) translateY(0) rotate(0)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -125,6 +129,7 @@ export default {
 				'cloud-move': 'cloud-move 8s linear forwards',
 				'balloon-pop': 'balloon-pop 0.5s ease-out forwards',
 				'cupid-shoot': 'cupid-shoot 3s ease-out forwards',
+				'arrow-shoot': 'arrow-shoot 2s ease-out forwards',
 			},
 			fontFamily: {
 				'bubblegum': ['Bubblegum Sans', 'cursive'],

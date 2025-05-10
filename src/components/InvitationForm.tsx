@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
-import { Pizza, Beer, Wine } from 'lucide-react';
+import { Pizza, Beer, Wine, ArrowUp, ChickenThighs, Pasta, Veggies } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 export const InvitationForm = () => {
@@ -107,14 +107,14 @@ export const InvitationForm = () => {
             <RadioGroup defaultValue="yes" className="flex flex-col space-y-1">
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-yellow p-2 px-4">
                 <RadioGroupItem value="yes" id="attending-yes" className="text-pink-500" />
-                <Label htmlFor="attending-yes" className="font-medium">Sure, why not, Nikhil!</Label>
+                <Label htmlFor="attending-yes" className="font-medium">Sure, why not, Nikhil! (Neek inko option ledhu Saaam 😉)</Label>
               </div>
             </RadioGroup>
           </div>
 
           {/* Question 2 */}
           <div className="space-y-3 animate-slide-in" style={{ animationDelay: '0.6s' }}>
-            <h3 className="text-xl font-bubblegum text-pink-500">What is your food Preference?</h3>
+            <h3 className="text-xl font-bubblegum text-pink-500">Em thintav Saaaammm ?</h3>
             <RadioGroup value={formData.foodPreference} onValueChange={handleFoodChange} className="flex flex-col space-y-2">
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Pizza" id="food-pizza" className="text-pink-500" />
@@ -124,15 +124,21 @@ export const InvitationForm = () => {
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Chicken Biryani" id="food-chicken" className="text-pink-500" />
-                <Label htmlFor="food-chicken" className="font-medium">Chicken Biryani</Label>
+                <Label htmlFor="food-chicken" className="font-medium flex items-center">
+                  <ChickenThighs size={20} className="mr-2" /> Chicken Biryani
+                </Label>
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Veg Biryani" id="food-veg" className="text-pink-500" />
-                <Label htmlFor="food-veg" className="font-medium">Veg Biryani</Label>
+                <Label htmlFor="food-veg" className="font-medium flex items-center">
+                  <Veggies size={20} className="mr-2" /> Veg Biryani
+                </Label>
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Pasta" id="food-pasta" className="text-pink-500" />
-                <Label htmlFor="food-pasta" className="font-medium">Pasta</Label>
+                <Label htmlFor="food-pasta" className="font-medium flex items-center">
+                  <Pasta size={20} className="mr-2" /> Pasta
+                </Label>
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
                 <RadioGroupItem value="Others" id="food-others" className="text-pink-500" />
@@ -143,7 +149,7 @@ export const InvitationForm = () => {
                 <div className="pl-8 pt-2">
                   <Input 
                     type="text" 
-                    placeholder="Please specify" 
+                    placeholder="Inkemana Kaavala cheppu thechedham" 
                     value={formData.otherFood} 
                     onChange={handleOtherFoodChange}
                     className="rounded-full border-pink-200 focus:border-pink-500 focus:ring-pink-500"
@@ -155,11 +161,13 @@ export const InvitationForm = () => {
 
           {/* Question 3 */}
           <div className="space-y-3 animate-slide-in" style={{ animationDelay: '0.8s' }}>
-            <h3 className="text-xl font-bubblegum text-pink-500">What is your drink preference?</h3>
+            <h3 className="text-xl font-bubblegum text-pink-500">Em thaaguthav Saaaaammmm</h3>
             <RadioGroup value={formData.drinkPreference} onValueChange={handleDrinkChange} className="flex flex-col space-y-2">
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-2 px-4">
                 <RadioGroupItem value="Alcohol" id="drink-alcohol" className="text-pink-500" />
-                <Label htmlFor="drink-alcohol" className="font-medium">Alcohol</Label>
+                <Label htmlFor="drink-alcohol" className="font-medium flex items-center">
+                  <ArrowUp size={20} className="mr-2" /> Alcohol
+                </Label>
               </div>
               <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-2 px-4">
                 <RadioGroupItem value="Wine" id="drink-wine" className="text-pink-500" />
