@@ -58,7 +58,24 @@ export const InvitationForm = () => {
     }
 
     // Log the submission
-    console.log('Form submitted:', formData);
+    fetch('https://script.google.com/macros/s/AKfycbz1zeIrrkgkamAbxOOHIscr3yKSUcBNGf9C6u1HO7t18vJ5WYgZkUsTSrDnF8N7C4m72g/exec', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(() => {
+      toast({
+        title: "Thank you for responding!",
+        description: "Your response has been recorded 🎉",
+      });
+    })
+    .catch((err) => {
+      toast({
+        title: "Error",
+        description: "Failed to send your response. Please try again later.",
+        variant: "destructive"
+      });
+    });
     
     // Show success message
     toast({
@@ -71,15 +88,21 @@ export const InvitationForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="bg-white/80 backdrop-blur-md w-full max-w-md p-8 rounded-3xl shadow-lg text-center space-y-6 animate-bounce-in">
-          <h2 className="text-3xl font-bubblegum text-pink-500">Yay! 🎉</h2>
-          <p className="text-xl text-pink-600 font-medium">Thanks for responding, Sam!</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-love-soft-peach to-white">
+        <div className="bg-white/90 backdrop-blur-md w-full max-w-md p-8 rounded-3xl shadow-xl text-center space-y-6 animate-bounce-in border-2 border-pink-200">
+          <div className="flex justify-center">
+            <div className="relative">
+              <span className="absolute -top-10 -left-10 text-4xl animate-float">🎉</span>
+              <span className="absolute -top-8 -right-10 text-4xl animate-float" style={{ animationDelay: '0.5s' }}>🥳</span>
+              <h2 className="text-4xl font-bubblegum bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">Yay!</h2>
+            </div>
+          </div>
+          <p className="text-2xl text-pink-600 font-medium">Thanks for responding, Sam!</p>
           <p className="text-lg">Can't wait to see you at the party!</p>
           <div className="pt-4">
             <Button 
               variant="outline" 
-              className="bg-love-soft-pink hover:bg-love-soft-purple text-pink-600 font-medium"
+              className="bg-love-soft-pink hover:bg-love-soft-purple text-pink-600 font-medium transform transition-transform duration-300 hover:scale-105"
               onClick={() => setIsSubmitted(false)}
             >
               Edit Response
@@ -91,23 +114,29 @@ export const InvitationForm = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-love-soft-peach to-white">
       <div 
-        className="bg-white/80 backdrop-blur-md w-full max-w-md p-8 rounded-3xl shadow-lg animate-slide-in"
+        className="bg-white/90 backdrop-blur-md w-full max-w-md p-8 rounded-3xl shadow-xl animate-slide-in border-2 border-pink-200"
         style={{ animationDelay: '0.2s' }}
       >
         <form onSubmit={handleSubmit} className="space-y-8">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bubblegum text-pink-500 text-center">You're invited to Nikhil's Birthday!</h2>
+          <div className="space-y-4 text-center">
+            <div className="flex justify-center">
+              <span className="text-4xl mb-2">🎂</span>
+            </div>
+            <h2 className="text-3xl font-bubblegum bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">
+              You're invited to Nikhil's Birthday!
+            </h2>
+            <p className="text-gray-600 text-sm">May 20th, 2023 • 7:00 PM • Bangalore</p>
           </div>
           
           {/* Question 1 */}
           <div className="space-y-3 animate-slide-in" style={{ animationDelay: '0.4s' }}>
             <h3 className="text-xl font-bubblegum text-pink-500">Are you coming to the Party?</h3>
             <RadioGroup defaultValue="yes" className="flex flex-col space-y-1">
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-yellow p-2 px-4">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-yellow p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="yes" id="attending-yes" className="text-pink-500" />
-                <Label htmlFor="attending-yes" className="font-medium">Sure, why not, Nikhil!</Label>
+                <Label htmlFor="attending-yes" className="font-medium">Sure, why not, Nikhil!(Neek inko option ledhu Saaam 😉)</Label>
               </div>
             </RadioGroup>
           </div>
@@ -115,32 +144,32 @@ export const InvitationForm = () => {
           {/* Question 2 */}
           <div className="space-y-3 animate-slide-in" style={{ animationDelay: '0.6s' }}>
             <h3 className="text-xl font-bubblegum text-pink-500">Em thintav Saaaammm ?</h3>
-            <RadioGroup value={formData.foodPreference} onValueChange={handleFoodChange} className="flex flex-col space-y-2">
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
+            <RadioGroup value={formData.foodPreference} onValueChange={handleFoodChange} className="flex flex-col space-y-3">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Pizza" id="food-pizza" className="text-pink-500" />
                 <Label htmlFor="food-pizza" className="font-medium flex items-center">
-                  <Pizza size={20} className="mr-2" /> Pizza
+                  <Pizza size={24} className="mr-2 text-pink-400" /> Pizza
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Chicken Biryani" id="food-chicken" className="text-pink-500" />
                 <Label htmlFor="food-chicken" className="font-medium">Chicken Biryani</Label>
               </div>
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Veg Biryani" id="food-veg" className="text-pink-500" />
                 <Label htmlFor="food-veg" className="font-medium">Veg Biryani</Label>
               </div>
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Pasta" id="food-pasta" className="text-pink-500" />
                 <Label htmlFor="food-pasta" className="font-medium">Pasta</Label>
               </div>
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-2 px-4">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-blue p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Others" id="food-others" className="text-pink-500" />
                 <Label htmlFor="food-others" className="font-medium">Others</Label>
               </div>
               
               {formData.foodPreference === 'Others' && (
-                <div className="pl-8 pt-2">
+                <div className="pl-8 pt-2 animate-fade-in">
                   <Input 
                     type="text" 
                     placeholder="Inkemana Kaavala cheppu thechedham" 
@@ -156,21 +185,21 @@ export const InvitationForm = () => {
           {/* Question 3 */}
           <div className="space-y-3 animate-slide-in" style={{ animationDelay: '0.8s' }}>
             <h3 className="text-xl font-bubblegum text-pink-500">Em thaaguthav Saaaaammmm</h3>
-            <RadioGroup value={formData.drinkPreference} onValueChange={handleDrinkChange} className="flex flex-col space-y-2">
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-2 px-4">
+            <RadioGroup value={formData.drinkPreference} onValueChange={handleDrinkChange} className="flex flex-col space-y-3">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Alcohol" id="drink-alcohol" className="text-pink-500" />
                 <Label htmlFor="drink-alcohol" className="font-medium">Alcohol</Label>
               </div>
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-2 px-4">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Wine" id="drink-wine" className="text-pink-500" />
                 <Label htmlFor="drink-wine" className="font-medium flex items-center">
-                  <Wine size={20} className="mr-2" /> Wine
+                  <Wine size={24} className="mr-2 text-pink-400" /> Wine
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-2 px-4">
+              <div className="flex items-center space-x-2 rounded-full bg-love-soft-purple p-3 px-5 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
                 <RadioGroupItem value="Beer" id="drink-beer" className="text-pink-500" />
                 <Label htmlFor="drink-beer" className="font-medium flex items-center">
-                  <Beer size={20} className="mr-2" /> Beer
+                  <Beer size={24} className="mr-2 text-pink-400" /> Beer
                 </Label>
               </div>
             </RadioGroup>
@@ -179,9 +208,9 @@ export const InvitationForm = () => {
           <div className="pt-6 animate-slide-in" style={{ animationDelay: '1s' }}>
             <Button 
               type="submit" 
-              className="w-full rounded-full bg-gradient-to-r from-pink-400 to-pink-500 text-white font-bubblegum text-lg py-6 hover:from-pink-500 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="w-full rounded-full bg-gradient-to-r from-pink-400 to-pink-500 text-white font-bubblegum text-lg py-6 hover:from-pink-500 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
             >
-              Submit
+              Can't wait to see you!
             </Button>
           </div>
         </form>
