@@ -16,6 +16,7 @@ export const InvitationForm = () => {
     drinkPreference: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFoodChange = (value: string) => {
     setFormData({ ...formData, foodPreference: value });
@@ -57,25 +58,52 @@ export const InvitationForm = () => {
       return;
     }
 
-    // Log the submission
-    fetch('https://script.google.com/macros/s/AKfycbz1zeIrrkgkamAbxOOHIscr3yKSUcBNGf9C6u1HO7t18vJ5WYgZkUsTSrDnF8N7C4m72g/exec', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(() => {
-      toast({
-        title: "Thank you for responding!",
-        description: "Your response has been recorded 🎉",
-      });
-    })
-    .catch((err) => {
-      toast({
-        title: "Error",
-        description: "Failed to send your response. Please try again later.",
-        variant: "destructive"
-      });
-    });
+    setIsSubmitting(true);
+    
+    // Send data via email using a simple form submission to formsubmit.co
+    const formElement = document.createElement('form');
+    formElement.method = 'POST';
+    formElement.action = 'https://formsubmit.co/nickiskick@gmail.com';
+    formElement.style.display = 'none';
+    
+    // Create hidden fields for the form data
+    const attendingField = document.createElement('input');
+    attendingField.type = 'hidden';
+    attendingField.name = 'Attending';
+    attendingField.value = formData.attending;
+    formElement.appendChild(attendingField);
+    
+    const foodField = document.createElement('input');
+    foodField.type = 'hidden';
+    foodField.name = 'Food Preference';
+    foodField.value = formData.foodPreference === 'Others' ? formData.otherFood : formData.foodPreference;
+    formElement.appendChild(foodField);
+    
+    const drinkField = document.createElement('input');
+    drinkField.type = 'hidden';
+    drinkField.name = 'Drink Preference';
+    drinkField.value = formData.drinkPreference;
+    formElement.appendChild(drinkField);
+    
+    // Add AJAX setting to formsubmit
+    const ajaxField = document.createElement('input');
+    ajaxField.type = 'hidden';
+    ajaxField.name = '_captcha';
+    ajaxField.value = 'false';
+    formElement.appendChild(ajaxField);
+    
+    // Set return URL to current page
+    const returnField = document.createElement('input');
+    returnField.type = 'hidden';
+    returnField.name = '_next';
+    returnField.value = window.location.href;
+    formElement.appendChild(returnField);
+    
+    // Append the form to the body
+    document.body.appendChild(formElement);
+    
+    // Submit the form
+    formElement.submit();
     
     // Show success message
     toast({
@@ -84,6 +112,12 @@ export const InvitationForm = () => {
     });
     
     setIsSubmitted(true);
+    setIsSubmitting(false);
+    
+    // Clean up - remove the form
+    setTimeout(() => {
+      document.body.removeChild(formElement);
+    }, 1000);
   };
 
   if (isSubmitted) {
@@ -127,7 +161,7 @@ export const InvitationForm = () => {
             <h2 className="text-3xl font-bubblegum bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">
               You're invited to Nikhil's Birthday!
             </h2>
-            <p className="text-gray-600 text-sm">May 20th, 2023 • 7:00 PM • Bangalore</p>
+            <p className="text-gray-600 text-sm">May 12th, 2025 • 10:00 PM</p>
           </div>
           
           {/* Question 1 */}
@@ -209,8 +243,9 @@ export const InvitationForm = () => {
             <Button 
               type="submit" 
               className="w-full rounded-full bg-gradient-to-r from-pink-400 to-pink-500 text-white font-bubblegum text-lg py-6 hover:from-pink-500 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+              disabled={isSubmitting}
             >
-              Can't wait to see you!
+              {isSubmitting ? "Sending..." : "Can't wait to see you!"}
             </Button>
           </div>
         </form>
